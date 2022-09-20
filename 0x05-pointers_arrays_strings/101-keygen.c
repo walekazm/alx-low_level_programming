@@ -1,78 +1,58 @@
-#include <math.h>
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-// Function to randomly generates password
-// of length N
+/**
+ * main - Generates random valid passwords for the
+ *        program 101-crackme.
+ *
+ * Return: Always 0.
+ */
 
-void randomPasswordGeneration(int N)
+int main(void)
 {
-	// Initialize counter
-	int i = 0;
+	char password[84];
+	int index = 0, sum = 0, diff_half1, diff_half2;
 
-	int randomizer = 0;
+	srand(time(0));
 
-	// Seed the random-number generator
-	// with current time so that the
-	// numbers will be different every time
-	srand((unsigned int)(time(NULL)));
+	while (sum < 2772)
+	{
+		password[index] = 33 + rand() % 94;
+		sum += password[index++];
+	}
 
-	// Array of numbers
-	char numbers[] = "0123456789";
+	password[index] = '\0';
 
-	// Array of small alphabets
-	char letter[] = "abcdefghijklmnoqprstuvwyzx";
+	if (sum != 2772)
+	{
 
-	// Array of capital alphabets
-	char LETTER[] = "ABCDEFGHIJKLMNOQPRSTUYWVZX";
+		diff_half1 = (sum - 2772) / 2;
+		diff_half2 = (sum - 2772) / 2;
+		if ((sum - 2772) % 2 != 0)
+			diff_half1++;
 
-	// Array of all the special symbols
-	char symbols[] = "!@#$^&*?";
+		for (index = 0; password[index]; index++)
 
-	// Stores the random password
-	char password[N];
-
-	// To select the randomizer
-	// inside the loop
-	randomizer = rand() % 4;
-
-	// Iterate over the range [0, N]
-	for (i = 0; i < N; i++) {
-
-		if (randomizer == 1) {
-			password[i] = numbers[rand() % 10];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
+		{
+			if (password[index] >= (33 + diff_half1))
+			{
+				password[index] -= diff_half1;
+				break;
+			}
 		}
-		else if (randomizer == 2) {
-			password[i] = symbols[rand() % 8];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-		else if (randomizer == 3) {
-			password[i] = LETTER[rand() % 26];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
-		}
-		else {
-			password[i] = letter[rand() % 26];
-			randomizer = rand() % 4;
-			printf("%c", password[i]);
+		for (index = 0; password[index]; index++)
+		{
+			if (password[index] >= (33 + diff_half2))
+			{
+				password[index] -= diff_half2;
+				break;
+			}
 		}
 	}
+
+	printf("%s", password);
+
+	return (0);
 }
-// Driver Code
-int main()
-{
-	// Length of the password to
-	// be generated
-	int N = 10;
-
-	// Function Call
-	randomPasswordGeneration(N);
-
-	return 0;
-}
-
-
