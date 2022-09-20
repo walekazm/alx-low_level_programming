@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
 *_puts - prints a string
@@ -7,6 +6,7 @@
 *
 *Return: void which means our answer is correct
 */
+
 
 void _puts(char *str)
 
@@ -18,8 +18,8 @@ c = str;
 
 for (m = 0; c[m]; m++)
 {
-	_putchar(c[m]);
-
+_putchar (c[m]);
 }
-	_putchar('\n');
+
+_putchar('\n');
 }
