@@ -16,7 +16,6 @@ void randomPasswordGeneration(int N)
 	// Seed the random-number generator
 	// with current time so that the
 	// numbers will be different every time
-
 	srand((unsigned int)(time(NULL)));
 
 	// Array of numbers
@@ -72,6 +71,7 @@ int main()
 
 	// Function Call
 	randomPasswordGeneration(N);
+
 	return 0;
 }
 
